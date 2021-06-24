@@ -2,18 +2,20 @@
 <html>
 <head>
 	<title>Get Out</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
   <div class="max-w-xl sm:mx-auto lg:max-w-2xl">
-    <div class="flex flex-col mb-16 sm:text-center sm:mb-0">
- 		<h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+  	<img id="image" src="#" />
+  	<h1 class="absolute top-0 p-2 max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white bg-black sm:text-4xl md:mx-auto">
           get 🌲 out
-        </h2>
+    </h1>
+    <div class="flex flex-col mb-16 sm:text-center sm:mb-0 p-4">
       <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-        <p id="idea1" class="text-base text-gray-700 md:text-lg">
-          You should really go <span id="activity" class="font-bold"></span> at the <span id="place" class="font-bold"></span> in <span id="city" class="font-bold"></span>, <span id="state" class="font-bold"></span>.
+        <p id="idea1" class="text-2xl text-black">
+          You should really go <span id="activity" class="font-bold"></span> at the <a id="link" href="#"><span id="place" class="underline font-bold"></span> </a> in <a id="maplink" href="#"><span id="city" class="underline font-bold"></span>, <span id="state" class="underline font-bold"></span></a>.
         </p>
       </div>
       <!-- <div id="newprompt">
@@ -58,14 +60,13 @@
       document.getElementById('activity').innerHTML = picked_prompt["fields"]["Activity"]; 
       document.getElementById('place').innerHTML = picked_prompt["fields"]["Place"];
       document.getElementById('city').innerHTML = picked_prompt["fields"]["City"]; 
-      document.getElementById('state').innerHTML = picked_prompt["fields"]["State"]; 
+      document.getElementById('state').innerHTML = picked_prompt["fields"]["State"];
+      document.getElementById('image').src = picked_prompt["fields"]["Image"][0]["url"]; 
+      document.getElementById('link').href = picked_prompt["fields"]["Link"]; 
+      document.getElementById('maplink').href = picked_prompt["fields"]["Map Link"]; 
     }
 
     fetch_new_prompt(res)
-
-    document.addEventListener("DOMContentLoaded", function(){
-    	fetch_new_prompt(res)
-    });
 
   })()
 
