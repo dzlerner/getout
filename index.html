@@ -6,13 +6,17 @@
 	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
+
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
   <div class="max-w-xl sm:mx-auto lg:max-w-2xl">
-  	<img id="image" src="#" />
+  	<img id="image" src="#" / class="hidden">
+  	<div id="image-skeleton" class="animate-pulse flex space-x-4">
+	    <div class="h-48 bg-black w-full"></div>
+	</div>  
   	<h1 class="absolute top-0 p-2 max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white bg-black sm:text-4xl md:mx-auto">
           🌲 get out more 
     </h1>
-    <div class="flex flex-col mb-16 sm:text-center sm:mb-0 p-4">
+    <div id="thing" class="flex flex-col mb-16 sm:text-center sm:mb-0 p-4 hidden">
       <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
         <p id="idea1" class="text-2xl text-black">
           You should really go <span id="activity" class="font-bold"></span> at the <a id="link" href="#"><span id="place" class="underline font-bold"></span> </a> in <a id="maplink" href="#"><span id="city" class="underline font-bold"></span>, <span id="state" class="underline font-bold"></span></a>.
@@ -27,14 +31,32 @@
         </a>
       </div>
     </div>
+	<div id="skeleton" class="rounded-md p-4 max-w-sm w-full mx-auto">
+	  <div class="animate-pulse flex space-x-4">
+	    <div class="flex-1 space-y-4">
+	      <div class="h-6 bg-black rounded w-3/4"></div>
+	        <div class="h-6 bg-black rounded"></div>
+	        <div class="h-6 bg-black rounded w-5/6"></div>
+	        <div class="mt-12 h-12 px-6 bg-black rounded w-32"></div>
+	      </div>
+	    </div>
+	  </div>
+	</div>    
   </div>
 </div>
+
+
+
 
 <script type="text/javascript">
 
 
 	get_random = function (list) {
   return list[Math.floor((Math.random()*list.length))];} 
+
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+	}
 
 	async function callingFn() {
       try {
@@ -57,13 +79,23 @@
 
     async function fetch_new_prompt(results) {
       const picked_prompt = get_random(results);
-      document.getElementById('activity').innerHTML = picked_prompt["fields"]["Activity"]; 
-      document.getElementById('place').innerHTML = picked_prompt["fields"]["Place"];
-      document.getElementById('city').innerHTML = picked_prompt["fields"]["City"]; 
-      document.getElementById('state').innerHTML = picked_prompt["fields"]["State"];
-      document.getElementById('image').src = picked_prompt["fields"]["Image"][0]["url"]; 
-      document.getElementById('link').href = picked_prompt["fields"]["Link"]; 
-      document.getElementById('maplink').href = picked_prompt["fields"]["Map Link"]; 
+        document.getElementById('thing').classList.add('hidden');
+	    document.getElementById('image').classList.add('hidden');
+	    document.getElementById('skeleton').classList.remove('hidden');
+	    document.getElementById('image-skeleton').classList.remove('hidden');
+      	document.getElementById('activity').innerHTML = picked_prompt["fields"]["Activity"]; 
+	    document.getElementById('place').innerHTML = picked_prompt["fields"]["Place"];
+	    document.getElementById('city').innerHTML = picked_prompt["fields"]["City"]; 
+	    document.getElementById('state').innerHTML = picked_prompt["fields"]["State"];
+	    document.getElementById('image').src = picked_prompt["fields"]["Image"][0]["url"]; 
+	    document.getElementById('link').href = picked_prompt["fields"]["Link"]; 
+	    document.getElementById('maplink').href = picked_prompt["fields"]["Map Link"];
+      sleep(1000).then(() => {
+	    document.getElementById('thing').classList.remove('hidden');
+	    document.getElementById('image').classList.remove('hidden');
+	    document.getElementById('skeleton').classList.add('hidden');
+	    document.getElementById('image-skeleton').classList.add('hidden');
+	  }); 
     }
 
     fetch_new_prompt(res)
