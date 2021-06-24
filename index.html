@@ -10,7 +10,7 @@
   <div class="max-w-xl sm:mx-auto lg:max-w-2xl">
   	<img id="image" src="#" />
   	<h1 class="absolute top-0 p-2 max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-white bg-black sm:text-4xl md:mx-auto">
-          get 🌲 out
+          🌲 get out more 
     </h1>
     <div class="flex flex-col mb-16 sm:text-center sm:mb-0 p-4">
       <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
@@ -18,13 +18,13 @@
           You should really go <span id="activity" class="font-bold"></span> at the <a id="link" href="#"><span id="place" class="underline font-bold"></span> </a> in <a id="maplink" href="#"><span id="city" class="underline font-bold"></span>, <span id="state" class="underline font-bold"></span></a>.
         </p>
       </div>
-      <!-- <div id="newprompt">
+      <div id="newprompt">
         <a
           href="#"
-          class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+          class="bg-black text-white inline-flex items-center justify-center h-12 px-6 font-medium"
         >
-          Get started
-        </a> -->
+          I don't like this
+        </a>
       </div>
     </div>
   </div>
@@ -68,7 +68,14 @@
 
     fetch_new_prompt(res)
 
+    document.querySelector('#newprompt').addEventListener('click', function (event) {
+		fetch_new_prompt(res)
+	});
+
   })()
+
+
+
 
 
 </script>
